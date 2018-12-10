@@ -80,6 +80,9 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const mapsRouter = require('./routes/mapsRouter');
+app.use('/maps', mapsRouter);
       
 
 module.exports = app;
