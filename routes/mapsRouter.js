@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 
-router.get('home', (req, res, next) => {
+router.get('/home', (req, res, next) => {
   console.log('Esta entrado aqui')
-  res.render("maps/home");
+  res.render("./maps/home");
 });
 
 
