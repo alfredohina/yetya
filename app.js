@@ -81,5 +81,7 @@ app.use('/', index);
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
       
+const crudRoutes = require("./routes/crud");
+app.use('/', crudRoutes);
 
 module.exports = app;

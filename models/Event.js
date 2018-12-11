@@ -4,7 +4,7 @@ const Schema   = mongoose.Schema;
 const eventSchema = new Schema({
   name: String,
   id_user_anunciante: String,
-  location: { type: { type: String }, coordinates: [Number] },
+  location: { type: { type: String }, coordinates: [Number], default: '2,5' },
   rating: Number,
   description: String,
   capacity:Number,
