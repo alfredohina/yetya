@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const {isLoggedOut} = require('../middlewares/isLogged')
 const {isLoggedIn} = require('../middlewares/isLogged')
 
 
@@ -14,7 +15,7 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
-router.post("/login",isLoggedIn('/'), passport.authenticate("local", {
+router.post("/login",isLoggedOut('/'), passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/auth/login",
   failureFlash: true,
@@ -62,6 +63,25 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
+router.get("/:id/profile", (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => {
+      res.render("auth/profile", { user });
+    })
+    .catch(err => {
+      console.log("Error editing profile", err);
+      next();
+    });
+});
+
+router.post("/profile/:id", (req, res, next) => {
+  const us = {
+    puntuacion: req.body.puntuacion,
+  };
+  User.findByIdAndUpdate(req.params.id, us)
+    .then(() => res.redirect("/"))
+    .catch(e => console.log("Error updating profile", e));
+});
 
 
 

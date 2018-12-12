@@ -10,17 +10,22 @@
 <body>
 
   <nav>
-    <a href="/">Home</a>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/auth/login">Login</a></li>
+      <li><a href="/auth/signup">Signup</a></li>
+
+      {{#if user}}
+      <br>
+      Welcome {{user.username}}
+      <li><a href="/auth/{{user._id}}/profile">My Profile</a></li>
+      <li><a href="/events">All events</a></li>
+      <li><a href="/auth/logout">Logout</a></li>
+      {{/if}}
+    </ul>
   </nav>
 
 
-  {{#if user}}
-      <a href="/auth/logout">Logout</a>
-      {{!-- {{else}}
-<a href="/auth/logout">Logout 222</a> --}}
-  {{/if}}
 
   {{{body}}}
 

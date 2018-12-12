@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const events = require("../models/event");
+const {isLoggedIn} = require('../middlewares/isLogged');
 
 
-router.get("/events", (req, res, next) => {
+
+router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
   events.find()
     .then(event => {
       res.render("events/index", { event });
@@ -47,7 +49,6 @@ router.get("/events/:id/edit", (req, res, next) => {
 
 
 router.post("/events", (req, res, next) => {
-  console.log('aaa')
   const event = {
     name: req.body.name,
     rating: req.body.rating,
