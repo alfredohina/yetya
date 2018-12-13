@@ -1,7 +1,10 @@
+require('dotenv').config();
+
 const express = require("express");
 const router = express.Router();
 const events = require("../models/event");
 const {isLoggedIn} = require('../middlewares/isLogged');
+const mongoose = require("mongoose");
 
 
 
@@ -15,6 +18,22 @@ router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
       next();
     });
 });
+
+
+router.get("/events/:id/myevents", (req, res, next) => {
+  events.find({id_user_anunciante:req.user._id})
+      .then(myev => {
+        console.log(myev)
+      res.render("events/myevents", { myev });
+
+    })
+    .catch(err => {
+      console.log("Error editing profile", err);
+      next();
+    });
+});
+
+
 
  router.get("/events/new", (req, res, next) => {
   res.render("events/new");
@@ -52,7 +71,8 @@ router.post("/events", (req, res, next) => {
   const event = {
     name: req.body.name,
     rating: req.body.rating,
-    description: req.body.description
+    description: req.body.description,
+    id_user_anunciante: req.user._id
   };
   events.create(event)
     .then(() => res.redirect("/events"))

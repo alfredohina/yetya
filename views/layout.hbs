@@ -20,6 +20,7 @@
       Welcome {{user.username}}
       <li><a href="/auth/{{user._id}}/profile">My Profile</a></li>
       <li><a href="/events">All events</a></li>
+      <li><a href="/events/{{user._id}}/myevents">My events</a></li>
       <li><a href="/auth/logout">Logout</a></li>
       {{/if}}
     </ul>
