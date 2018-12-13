@@ -37,7 +37,7 @@ let events = [
   {
   name: "The concert!!",
   id_user_anunciante: "5c06d6125ef77c07aa3ddcae",
-  location: {type:"Point",coordinates:[40423687,-3672756]},
+  location: {type:"Point",coordinates:[40.423687,-3.672756]},
   rating: 7,
   description: "He creado una partitura sin notas y nos deleitaremos en el palacio de los deportes escuchando nada",
   capacity: 120,
