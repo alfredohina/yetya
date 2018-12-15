@@ -1,6 +1,21 @@
-<h2>This are your events {{user.username}}</h2>
+<h2>These are your events {{user.username}}</h2>
 {{#each myev}}
-  {{this.name}}
-  {{this.rating}}
-  {{this.description}} 
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{this.eventImage}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <p class="card-text">Rating: {{this.rating}}</p>
+    <p class="card-text">{{this.description}}</p>
+        <a href="/events/{{this._id}}" class="btn btn-outline-success">View event</a>
+    <a href="/events/{{this._id}}/edit" class="btn btn-outline-success">Edit this event</a>
+    <a href="/events/{{this._id}}/delete" class="btn btn-outline-danger">Delete this event</a>
+     <a href="/events/new" class="btn btn-success">Create an event</a>
+  </div>
+</div>
+
+
+  
+  
+   
 {{/each}}

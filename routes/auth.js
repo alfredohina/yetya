@@ -29,6 +29,8 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const mail = req.body.mail;
+  const role = "cliente";
   if (username === "" || password === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
@@ -45,7 +47,9 @@ router.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      mail,
+      role
     });
 
     newUser.save()
@@ -57,6 +61,53 @@ router.post("/signup", (req, res, next) => {
     })
   });
 });
+
+
+
+
+router.get("/signup2", (req, res, next) => {
+  res.render("auth/signup2");
+});
+
+router.post("/signup2", (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const mail = req.body.mail;
+  const role = "anunciante";
+  if (username === "" || password === "") {
+    res.render("auth/signup2", { message: "Indicate username and password" });
+    return;
+  }
+
+  User.findOne({ username }, "username", (err, user) => {
+    if (user !== null) {
+      res.render("auth/signup2", { message: "The username already exists" });
+      return;
+    }
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const newUser = new User({
+      username,
+      password: hashPass,
+      mail,
+      role
+    });
+
+    newUser.save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch(err => {
+      res.render("auth/signup2", { message: "Something went wrong" });
+    })
+  });
+});
+
+
+
+
 
 router.get("/logout", (req, res) => {
   req.logout();
