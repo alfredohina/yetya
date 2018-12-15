@@ -35,6 +35,6 @@ const loadData = map => {
       },
       map
     )
-  );
+  )
 };
 

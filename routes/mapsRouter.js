@@ -19,8 +19,8 @@ router.get("/apievents", (req, res, next) => {
 
   Axios.get(baseURL)
     .then(data => {
-      console.log(data.data["@graph"][0]);
-      res.json(data.data);
+      console.log(data.data["@graph"]);
+      res.json(data.data["@graph"]);
     })
     .catch((err) => console.log(err));
     
