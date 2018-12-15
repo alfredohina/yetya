@@ -13,6 +13,13 @@
   
   
   geolocateMe()
-    .then(center => map.setCenter(center))
+    .then(center => {
+      console.log(`esto es center ${center.lng}`)
+      latitud = center.lat;
+      longitud = center.lng;
+      getApiData(latitud,longitud)
+
+      map.setCenter(center)
+    })
     .catch(e => console.log(e))
 
