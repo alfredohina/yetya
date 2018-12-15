@@ -1,8 +1,11 @@
 let eventsInfo = [];
 
 const getApiData = () => {
-  axios.get(/maps/apievents)
+  console.log('aqui llega')
+  
+  axios.get('/maps/apievents')
     .then(events => {
+      console.log('aqui no llega ni de coña')
       console.log(events);
       events.forEach(event => {
         let eventInfo = {
@@ -37,6 +40,7 @@ const drawMap = obj => {
     position: obj,
     title: "Estas aqui"
   });
+
   userMaker.setMap(mapa);
   let markers = eventsInfo.map(event => {
     return new google.maps.marker({
