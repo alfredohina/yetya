@@ -128,6 +128,9 @@ router.get("/:id/profile", (req, res, next) => {
 router.post("/profile/:id", (req, res, next) => {
   const us = {
     puntuacion: req.body.puntuacion,
+    mail: req.body.mail,
+    role: req.body.role,
+    description: req.body.description
   };
   User.findByIdAndUpdate(req.params.id, us)
     .then(() => res.redirect("/"))
