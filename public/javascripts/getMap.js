@@ -25,7 +25,7 @@ const addMarker = (title, position, map) => {
 
 
 const loadData = map => {
-  console.log(events);
+  //console.log(events);
   events.forEach(events =>
     addMarker(
       events.name,
