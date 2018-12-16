@@ -14,7 +14,8 @@ const geolocateMe = () => {
               lat: 40.3820829,
               lng: -3.6738811
             },
-            "Error in the geolocation service.");
+            "Error in the geolocation service."
+          );
         }
       );
     } else {
@@ -28,29 +29,36 @@ const geolocateMe = () => {
           lat: 40.3820829,
           lng: -3.6738811
         },
-        "Browser does not support geolocation.");
+        "Browser does not support geolocation."
+      );
     }
   });
 };
 
-const addMarker = (title, position, map) => {
-  return new google.maps.Marker({
-    position,
+const addmaker = (titulo,posicion,map)=>{
+  const marker = new google.maps.Marker({
+    position:posicion ,
     map,
-    title
+    title: titulo
+  })
+  marker.addListener('click', function() {
+    console.log('entra aqui')
+    infowindow.open(map, marker);
   });
-};
+}
+
+  
 
 const loadData = map => {
-  //console.log(events);
-  events.forEach(events =>
+  console.log(events);
+  events.forEach(events =>{
     addMarker(
       events.name,
       {
         lat: events.location.coordinates[0],
         lng: events.location.coordinates[1]
       },
-      map
-    )
+      map)
+  }
   );
 };

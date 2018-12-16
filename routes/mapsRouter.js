@@ -18,7 +18,7 @@ router.post("/apievents", (req, res, next) => {
   console.log('Esta llegando al back')
 
   let baseURL =
-  `https://datos.madrid.es/egob/catalogo/206974-0-agenda-eventos-culturales-100.json`;
+  `https://datos.madrid.es/egob/catalogo/206974-0-agenda-eventos-culturales-100.json?latitud=${latitud}&longitud=${longitud}&distancia=1000`;
   //filtro de 1 KM
   //?latitud=${latitud}&longitud=${longitud}&distancia=1000
 
