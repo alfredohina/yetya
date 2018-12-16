@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require("express");
 const router = express.Router();
-const events = require("../models/event");
+const events = require("../models/Event");
 const {isLoggedIn} = require('../middlewares/isLogged');
 const mongoose = require("mongoose");
 
