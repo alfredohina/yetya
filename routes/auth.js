@@ -7,6 +7,7 @@ const User = require("../models/User");
 const {isLoggedOut} = require('../middlewares/isLogged')
 const {isLoggedIn} = require('../middlewares/isLogged')
 const uploadCloud = require('../config/cloudinary');
+const sendMail = require("../email/sendmail");
 
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
@@ -55,6 +56,7 @@ router.post("/signup", (req, res, next) => {
 
     newUser.save()
     .then(() => {
+      sendMail(mail, "Welcome to Yetya");
       res.redirect("/auth/login");
     })
     .catch(err => {
@@ -63,8 +65,6 @@ router.post("/signup", (req, res, next) => {
     })
   });
 });
-
-
 
 
 router.get("/signup2", (req, res, next) => {
@@ -106,8 +106,6 @@ router.post("/signup2", (req, res, next) => {
     })
   });
 });
-
-
 
 
 

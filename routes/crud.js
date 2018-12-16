@@ -100,4 +100,5 @@ router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
     .catch(e => console.log("Error updating event", e));
 });
 
+
 module.exports = router;
