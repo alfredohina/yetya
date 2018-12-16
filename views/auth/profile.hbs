@@ -1,0 +1,9 @@
+ <h2>Hello {{user.username}}</h2>
+     <form action="/auth/profile/{{user._id}}" method="POST">
+        <label>Puntuacion:</label>
+        <input type="text" name="puntuacion" placeholder="Puntuacion">
+        <button type="submit">Edit profile</button>
+    </form> 
+
+ <br><br>
+ <a href="/auth/signup2" class="btn btn-outline-success">Edit my profile</a>

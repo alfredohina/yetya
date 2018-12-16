@@ -1,0 +1,10 @@
+<h2>Editing {{ev.name}}</h2>
+     <form action="/events/{{ev.id}}" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="Name">
+        <label>Rating</label>
+        <input type="text" name="rating" placeholder="Rating">
+        <label>Description</label>
+        <input type="text" name="description" placeholder="Description">
+        <button type="submit">Edit event</button>
+    </form> 

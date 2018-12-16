@@ -34,6 +34,44 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+
+
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: {
+    maxAge: 60000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+app.use(flash());
+
+
+
+// Enable authentication using session + passport
+app.use(session({
+  secret: 'irongenerator',
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore( { mongooseConnection: mongoose.connection })
+}))
+app.use(flash());
+require('./passport')(app);
+
+
+app.use((req,res,next)=>{
+  res.locals.user = req.user;
+  let messages = [...req.flash('error'),...req.flash('info')];
+  debug(messages);
+  res.locals.messages = messages;
+  next();
+})
+
+
+
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -63,16 +101,6 @@ hbs.registerHelper('ifUndefined', (value, options) => {
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
 
-
-// Enable authentication using session + passport
-app.use(session({
-  secret: 'irongenerator',
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore( { mongooseConnection: mongoose.connection })
-}))
-app.use(flash());
-require('./passport')(app);
     
 
 const index = require('./routes/index');
@@ -84,5 +112,7 @@ app.use('/auth', authRoutes);
 const mapsRouter = require('./routes/mapsRouter');
 app.use('/maps', mapsRouter);
       
+const crudRoutes = require("./routes/crud");
+app.use('/', crudRoutes);
 
 module.exports = app;

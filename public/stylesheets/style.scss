@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 0 auto;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -11,4 +11,35 @@ a {
 #map{
   height: 500px;
   width: 100%;
+}
+.container-fluid {
+  padding: 0 50px !important;
+}
+
+.container {
+  margin: 40px 0;
+}
+
+.file1 {
+  margin: 120px 0;
+}
+
+.footer-bg {
+  background-color: #4ea84d;
+}
+
+.page-footer {
+  color: white;
+}
+
+.page-footer a {
+  color: white;
+}
+
+.col-sm img {
+  border-radius: .25rem;
+}
+
+.card .btn {
+  margin: 5px 0;
 }
