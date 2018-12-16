@@ -5,6 +5,7 @@ const router = express.Router();
 const events = require("../models/Event");
 const {isLoggedIn} = require('../middlewares/isLogged');
 const mongoose = require("mongoose");
+const uploadCloud = require('../config/cloudinary');
 
 router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
   var useradmin = false;
@@ -69,7 +70,7 @@ router.get("/events/:id/edit", (req, res, next) => {
 });
 
 
-router.post("/events", (req, res, next) => {
+router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
   const event = {
     name: req.body.name,
     capacity: req.body.capacity,
@@ -77,7 +78,8 @@ router.post("/events", (req, res, next) => {
     id_user_anunciante: req.user._id,
     date: req.body.date,
     price: req.body.price,
-    category: req.body.category
+    category: req.body.category,
+    imgPath: req.file.url
   };
   events.create(event)
     .then(() => res.redirect("/events"))
