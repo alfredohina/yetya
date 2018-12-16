@@ -1,7 +1,7 @@
 
   const map = new google.maps.Map(
     document.getElementById('map'), {
-      zoom: 15,
+      zoom: 14,
       center: {
         lat: 40.4197351,
         lng: -3.7040427
@@ -14,12 +14,12 @@
   
   geolocateMe()
     .then(center => {
-      console.log(`esto es center ${center.lng}`)
+      console.log(`Esta entrando aqui`)
       latitud = center.lat;
       longitud = center.lng;
       getApiData(latitud,longitud)
 
       map.setCenter(center)
     })
-    .catch(e => console.log(e))
+    .catch(() => console.log('la puta muerte'))
 
