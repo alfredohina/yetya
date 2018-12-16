@@ -6,12 +6,14 @@ const events = require("../models/Event");
 const {isLoggedIn} = require('../middlewares/isLogged');
 const mongoose = require("mongoose");
 
-
-
 router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
+  var useradmin = false;
+  if (req.user.role === "anunciante") {
+    useradmin = true;
+  }
   events.find()
     .then(event => {
-      res.render("events/index", { event });
+      res.render("events/index", { event, useradmin });
     })
     .catch(e => {
       console.log("Error on router get event", e);
@@ -70,9 +72,12 @@ router.get("/events/:id/edit", (req, res, next) => {
 router.post("/events", (req, res, next) => {
   const event = {
     name: req.body.name,
-    rating: req.body.rating,
+    capacity: req.body.capacity,
     description: req.body.description,
-    id_user_anunciante: req.user._id
+    id_user_anunciante: req.user._id,
+    date: req.body.date,
+    price: req.body.price,
+    category: req.body.category
   };
   events.create(event)
     .then(() => res.redirect("/events"))
