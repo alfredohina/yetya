@@ -72,9 +72,12 @@ router.get("/events/:id/edit", (req, res, next) => {
 router.post("/events", (req, res, next) => {
   const event = {
     name: req.body.name,
-    rating: req.body.rating,
+    capacity: req.body.capacity,
     description: req.body.description,
-    id_user_anunciante: req.user._id
+    id_user_anunciante: req.user._id,
+    date: req.body.date,
+    price: req.body.price,
+    category: req.body.category
   };
   events.create(event)
     .then(() => res.redirect("/events"))
