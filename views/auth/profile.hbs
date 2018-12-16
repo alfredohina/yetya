@@ -1,78 +1,96 @@
-
 <head>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
 </head>
 
 
 
 <div class="container bootstrap snippet">
     <div class="row">
-  		<div class="col-sm-10"><h1>Hello {{user.username}}</h1></div>
+        <div class="col-sm-10">
+            <h1>Hello {{user.username}}</h1>
+        </div>
     </div>
     <div class="row">
-  		<div class="col-sm-3"><!--left col-->
-              
+        <div class="col-sm-3">
+            <!--left col-->
 
-      <div class="text-center">
-        <img src="/images/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Upload your photo...</h6>
-        <input type="file" class="text-center center-block file-upload">
-      </div></hr><br>
-                  <b>Email:</b> {{user.mail}}<br>
+
+            <div class="text-center">
+                <img src="{{user.imgPath}}" class="avatar img-circle img-thumbnail" alt="avatar">
+            </div>
+            </hr><br>
+            <b>Email:</b> {{user.mail}}<br>
             <b>Role:</b> {{user.role}}<br>
             <b>Description:</b> {{user.description}}
-          
-          <ul class="list-group">
-            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>My events</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Registered on</strong></span> {{user.timestamps.createdAt}}</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Puntuation</strong></span> {{user.puntuation}}</li>
-          </ul> 
-          
-        </div><!--/col-3-->
-    	<div class="col-sm-9">
- 
-          <div class="tab-content">
-            <div class="tab-pane active" id="home">
-              
+
+            <ul class="list-group">
+                <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>My events</strong></span> 125</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Registered on</strong></span>
+                    {{user.timestamps.createdAt}}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong>Puntuation</strong></span>
+                    {{user.puntuation}}</li>
+            </ul>
+
+        </div>
+        <!--/col-3-->
+        <div class="col-sm-9">
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
 
 
-            <form action="/auth/profile/{{user._id}}" method="POST">
-            <div class="row">
-                <div class="col">
-                    <label for="email">
-                        <h4>Email</h4>
-                    </label>
-                    <input type="email" name="mail" class="form-control" placeholder="example@example.com">
+
+                    <form action="/auth/profile/{{user._id}}" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <label for="email">
+                                    <h4>Email</h4>
+                                </label>
+                                <input type="email" name="mail" class="form-control" placeholder="example@example.com">
+                            </div>
+
+
+                            <div class="col">
+                                <label for="role">
+                                    <h4>Registered as</h4>
+                                </label>
+                                <select name="role" class="form-control" id="exampleFormControlSelect1">
+                                    <option value="cliente">Cliente</option>
+                                    <option value="anunciante">Anunciante</option>
+                                </select>
+                            </div>
+
+
+
+
+                        </div>
+
+                        <br>
+
+
+                        <divclass="col">
+
+                            <label for="description">
+                                <h4>About you</h4>
+                            </label>
+                            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                 </div>
-            
-            
-                <div class="col">
-                    <label for="role">
-                        <h4>Registered as</h4>
-                    </label>
-                    <select name="role" class="form-control" id="exampleFormControlSelect1">
-                        <option value="cliente">Cliente</option>
-                        <option value="anunciante">Anunciante</option>
-                    </select>
-                </div>
-        
-            
-            
-            
             </div>
-            
+
             <br>
 
-
-                            <divclass="col">
-            
-<label for="description">
-                        <h4>About you</h4>
+            <div class="form-row">
+                <div class="form-group col-md">
+                    <label for="photo">
+                        <h4>Upload a picture</h4>
                     </label>
-                                        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                    <input type="file" name="photo" class="form-control">
+                </div>
             </div>
-            </div>
+
+
             <br>
             <button class="btn btn-lg btn-outline-success" type="submit">Edit profile</button>
             <button class="btn btn-lg btn-outline-secondary" type="reset"><i class="fas fa-redo-alt"></i> Reset</button>
@@ -80,13 +98,13 @@
 
 
 
-              
-             </div>
- 
- 
-               
-              </div>
-          </div>
 
         </div>
+
+
+
     </div>
+</div>
+
+</div>
+</div>

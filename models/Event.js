@@ -12,8 +12,7 @@ const eventSchema = new Schema({
   reserved: [{ id_cliente: String, isCoomed: false}],
   date: Date,
   price: Number,
-  imgPath: String,
-  eventImage: {type: String, default: 'https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg'},
+  imgPath: {type: String, default: 'https://res.cloudinary.com/drlexgkiu/image/upload/v1544979115/defaultevent.png'},
   category: {type: String, enum:["street", "cultural", "gastronomy", "other"] },
    
 }, {

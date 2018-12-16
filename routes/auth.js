@@ -1,12 +1,13 @@
+require('dotenv').config();
+
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
 const {isLoggedOut} = require('../middlewares/isLogged')
 const {isLoggedIn} = require('../middlewares/isLogged')
+const uploadCloud = require('../config/cloudinary');
 
-
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
 
@@ -126,12 +127,13 @@ router.get("/:id/profile", (req, res, next) => {
     });
 });
 
-router.post("/profile/:id", (req, res, next) => {
+router.post("/profile/:id", uploadCloud.single('photo'), (req, res, next) => {
   const us = {
     puntuacion: req.body.puntuacion,
     mail: req.body.mail,
     role: req.body.role,
-    description: req.body.description
+    description: req.body.description,
+    imgPath: req.file.url
   };
   User.findByIdAndUpdate(req.params.id, us)
     .then(() => res.redirect("/"))

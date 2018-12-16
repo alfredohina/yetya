@@ -26,7 +26,6 @@ router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
 router.get("/events/:id/myevents", (req, res, next) => {
   events.find({id_user_anunciante:req.user._id})
       .then(myev => {
-        console.log(myev)
       res.render("events/myevents", { myev });
 
     })
