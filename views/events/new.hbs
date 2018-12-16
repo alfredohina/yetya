@@ -1,10 +1,70 @@
 <h2>Create an Event</h2>
-     <form action="/events" method="POST">
+     {{!-- <form action="/events" method="POST">
         <label>Name:</label>
         <input type="text" name="name" placeholder="Name">
         {{!-- <label>Rating:</label>
         <input type="text" name="rating" placeholder="Rating">
         <label>Description:</label>
         <input type="text" name="description" placeholder="Description"> --}}
-        <button type="submit">Add new event</button>
-    </form>
+    </form> --}}
+
+
+
+
+    	<div class="col-sm-9">
+ 
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              
+
+
+            <form action="/events" method="POST">
+            <div class="row">
+                <div class="col">
+                    <label for="name">
+                        <h4>Name</h4>
+                    </label>
+                    <input type="text" name="name" class="form-control" placeholder="Free Tour">
+                </div>
+            
+            
+                <div class="col">
+                    <label for="role">
+                        <h4>Registered as</h4>
+                    </label>
+                    <select name="role" class="form-control" id="exampleFormControlSelect1">
+                        <option value="cliente">Cliente</option>
+                        <option value="anunciante">Anunciante</option>
+                    </select>
+                </div>
+        
+            
+            
+            
+            </div>
+            
+            <br>
+
+
+                            <divclass="col">
+            
+<label for="description">
+                        <h4>About you</h4>
+                    </label>
+                                        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+            </div>
+            </div>
+            <br>
+            <button type="submit">Add new event</button>
+            <button class="btn btn-lg btn-outline-secondary" type="reset"><i class="fas fa-redo-alt"></i> Reset</button>
+            </form>
+
+
+
+              
+             </div>
+ 
+ 
+               
+              </div>
+          </div>

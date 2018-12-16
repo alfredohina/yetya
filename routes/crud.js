@@ -6,12 +6,14 @@ const events = require("../models/event");
 const {isLoggedIn} = require('../middlewares/isLogged');
 const mongoose = require("mongoose");
 
-
-
 router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
+  var useradmin = false;
+  if (req.user.role === "anunciante") {
+    useradmin = true;
+  }
   events.find()
     .then(event => {
-      res.render("events/index", { event });
+      res.render("events/index", { event, useradmin });
     })
     .catch(e => {
       console.log("Error on router get event", e);

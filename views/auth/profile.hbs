@@ -14,20 +14,20 @@
               
 
       <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <img src="/images/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
         <h6>Upload your photo...</h6>
         <input type="file" class="text-center center-block file-upload">
       </div></hr><br>
+                  <b>Email:</b> {{user.mail}}<br>
+            <b>Role:</b> {{user.role}}<br>
+            <b>Description:</b> {{user.description}}
           
           <ul class="list-group">
             <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
             <li class="list-group-item text-right"><span class="pull-left"><strong>My events</strong></span> 125</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Registered on</strong></span> 13</li>
-            <li class="list-group-item text-right"><span class="pull-left"><strong>Puntuation</strong></span> 37</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Registered on</strong></span> {{user.timestamps.createdAt}}</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Puntuation</strong></span> {{user.puntuation}}</li>
           </ul> 
-            Email: {{user.mail}}<br>
-            Role: {{user.role}}<br>
-            Description: {{user.description}}
           
         </div><!--/col-3-->
     	<div class="col-sm-9">
