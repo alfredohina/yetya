@@ -1,9 +1,9 @@
 const getApiData = (latitud, longitud) => {
+  
 
-
-  axios.post("/maps/apievents",{latitud = 40.23232323, longitud = -3.21333223}).then(events => {
+  axios.post("/maps/apievents",{latitud, longitud}).then(events => {
     events.data.forEach(e => {
-      console.log('entra aqui');
+      console.log(e);
       if (e.location)
         addMarker(
           e.title,
