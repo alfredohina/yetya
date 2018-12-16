@@ -17,7 +17,10 @@ geolocateMe()
     latitud = center.lat;
     longitud = center.lng;
     getApiData(latitud,longitud)
-
     map.setCenter(center)
   })
-  .catch(e => console.log(e))
+  .catch(position => {
+    console.log(`esto es position lng ${position.lng}`)
+    latitud = position.lat;
+    longitud = position.lng;
+})
