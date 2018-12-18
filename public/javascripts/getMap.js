@@ -18,15 +18,17 @@ const geolocateMe = () => {
   });
 };
 
-const addmaker = (titulo, posicion, map, infowindow) => {
+const addMarker = (titulo, posicion, map,icon,infowindow) => {
   let marker = new google.maps.Marker({
     position: posicion,
     map,
-    title: titulo
+    title: titulo,
+    icon: icon
   });
   marker.addListener("click", function() {
     infowindow.open(map, marker);
   });
+   return marker
 };
 
 let infowindow;
@@ -45,13 +47,14 @@ const loadData = map => {
 
       ,maxWidth: 400
     });
-    addmaker(
+    addMarker(
       event.name,
       {
         lat: event.location.coordinates[0],
         lng: event.location.coordinates[1]
       },
       map,
+       'https://res.cloudinary.com/drlexgkiu/image/upload/v1545159229/yetyamaps.png',
       infowindow
     );
   });

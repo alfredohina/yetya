@@ -9,23 +9,24 @@ const getApiData = (latitud, longitud) => {
       let infowindow = new google.maps.InfoWindow({
         content:
           "<div><strong>" +
-          e.name +
+          e.title +
           "</strong><br>" +
           "Description: " +
           e.description,
         maxWidth: 200
       })
-        addMarker(
+      addMarker(
           e.title,
           {
             lat: e.location.latitude,
             lng: e.location.longitude
           },
           map,
+          'https://res.cloudinary.com/drlexgkiu/image/upload/v1545160071/logomadrid.png',
           infowindow
         );}
     });
   });
 };
 
-getApiData(latitud, longitud);
+getApiData();
