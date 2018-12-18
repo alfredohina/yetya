@@ -46,10 +46,7 @@ const addmaker = (titulo,posicion,map) =>{
   });
 }
 
-
-
-
-var infowindow;
+let infowindow;
 
 const loadData = map => {
   events.forEach(events => {
@@ -57,9 +54,11 @@ const loadData = map => {
     addmaker(events.name, {lat: events.location.coordinates[0],lng: events.location.coordinates[1]}, map)
     infowindow = new google.maps.InfoWindow({
       content: ('<div><strong>' + events.name + '</strong><br>' +
-      'Description: ' + events.description)
+      'Description: ' + events.description),
+      maxWidth: 200
     });
-    console.log(events.description)
+    console.log(events.name)
+    console.log(infowindow)
   });
 };
 
