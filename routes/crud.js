@@ -27,7 +27,6 @@ router.get("/events/:id/myevents", (req, res, next) => {
   events.find({id_user_anunciante:req.user._id})
       .then(myev => {
       res.render("events/myevents", { myev });
-
     })
     .catch(err => {
       console.log("Error editing profile", err);
@@ -60,7 +59,9 @@ router.get("/events/:id/delete", (req, res, next) => {
 router.get("/events/:id/edit", (req, res, next) => {
   events.findById(req.params.id)
     .then(ev => {
+      console.log(ev)
       res.render("events/edit", { ev });
+
     })
     .catch(err => {
       console.log("Error editing event", err);
@@ -78,7 +79,7 @@ router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
     date: req.body.date,
     price: req.body.price,
     category: req.body.category,
-    imgPath: req.file.url
+    // imgPath: req.file.url
   };
   events.create(event)
     .then(() => res.redirect("/events"))
@@ -89,15 +90,33 @@ router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
 });
 
 
- router.post("/events/:id", (req, res, next) => {
+ router.post("/events/:id", uploadCloud.single('photo'), (req, res, next) => {
+  console.log(req.body.name)
   const event = {
     name: req.body.name,
+    capacity: req.body.capacity,
+    description: req.body.description,
+    id_user_anunciante: req.user._id,
+    date: req.body.date,
+    price: req.body.price,
+    category: req.body.category,
     rating: req.body.rating,
-    description: req.body.description
   };
   events.findByIdAndUpdate(req.params.id, event)
     .then(() => res.redirect("/events/"))
     .catch(e => console.log("Error updating event", e));
 });
+
+
+// router.post("/myevents/:id", (req, res, next) => {
+//   const event = {
+    
+//   };
+//   events.findByIdAndUpdate(req.params.id, event)
+//     .then(() => res.redirect("/events/:id/myevents/"))
+//     .catch(e => console.log("Error updating event", e));
+// });
+
+
 
 module.exports = router;

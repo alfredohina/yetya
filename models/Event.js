@@ -11,10 +11,9 @@ const eventSchema = new Schema({
   capacity:Number,
   reserved: [{ id_cliente: String, isCoomed: false}],
   date: Date,
-  price: Number,
+  price: { type: Number, required: true },
   imgPath: {type: String, default: 'https://res.cloudinary.com/drlexgkiu/image/upload/v1544979115/defaultevent.png'},
   category: {type: String, enum:["street", "cultural", "gastronomy", "other"] },
-   
 }, {
   timestamps: {
     createdAt: 'created_at',
