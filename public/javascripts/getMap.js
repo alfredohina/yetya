@@ -40,7 +40,7 @@ const loadData = map => {
         event.name +
         "</strong><br>" +
         "Description: " +
-        event.description +
+        event.description + "</br>" +
         `<a href="/events/${event._id}" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>`
 
       ,maxWidth: 400

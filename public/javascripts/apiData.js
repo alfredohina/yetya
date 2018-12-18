@@ -1,6 +1,7 @@
 const getApiData = (latitud, longitud) => {
 
   axios.post("/maps/apievents",{latitud, longitud}).then(events => {
+    console.log(events);
     console.log('Entra en apidata')
     events.data.forEach(e => {
       //console.log(e);
@@ -8,22 +9,23 @@ const getApiData = (latitud, longitud) => {
       let infowindow = new google.maps.InfoWindow({
         content:
           "<div><strong>" +
-          event.name +
+          e.name +
           "</strong><br>" +
           "Description: " +
-          event.description,
+          e.description,
         maxWidth: 200
-      });
+      })
         addMarker(
           e.title,
           {
             lat: e.location.latitude,
             lng: e.location.longitude
           },
-          map
+          map,
+          infowindow
         );}
     });
   });
 };
 
-getApiData();
+getApiData(latitud, longitud);

@@ -37,6 +37,7 @@ geolocateMe()
   .catch(() => { 
     console.log('Aqui catch geolocateme')
     geolocateMe() 
+    console.log('Vuelve aqui')
   })
 
   
