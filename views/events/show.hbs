@@ -1,3 +1,62 @@
-<h2>{{ev.name}}</h2>
-  {{ev.rating}}
-  {{ev.description}} 
+<link rel="stylesheet" href="/stylesheets/star.css" />
+
+ <section class="listing-page-builing">
+      <div class="container">
+         <div class="row">
+               <div class="col-4">
+
+
+
+ <center>
+
+<a class="btn btn-outline-success" href="#" onclick="history.go(-1)">Go Back</a>
+
+<br><br>
+
+
+            <img class="card-img-top" src="{{ev.imgPath}}" alt="Card image cap">
+<br>
+				  <br>
+         
+          <form action="/events/{{ev.id}}" method="POST">
+            <button type="submit" class="btn btn-success">I Will Go</button>
+          </form> 
+
+
+<form action="/events/{{ev.id}}" method="POST">
+<fieldset class="rating">
+    <input type="radio" onClick="envia_form()" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" onClick="envia_form()" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" onClick="envia_form()" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" onClick="envia_form()" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" onClick="envia_form()" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+</fieldset>
+
+<button type="submit" class="btn btn-outline-warning"><i class="fas fa-star"></i> Rate</button>
+</form>
+
+
+					</center>
+					
+					
+				</div>
+               <div class="col-8">
+                  <br>
+                  <h2>{{ev.name}}</h2>
+                  <ul class="poperty-details-iob">
+                     <li><span><b>Date</b>:  {{ev.date}}
+                     </li>
+                     <li><span><b>Category</b>:  {{ev.category}}
+                     </li>
+                     <li><span><b>Rating</b>: {{ev.rating}}
+                     </li>
+                     <li><span><b>Description</b>: 
+                     </li>
+                     <li><span><b>Price</b>:  {{ev.price}} €
+                     </li>
+                  </ul>
+                  {{ev.description}}
+               </div>
+            </div>
+      </div>
+   </section>

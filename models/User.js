@@ -8,6 +8,8 @@ const userSchema = new Schema({
   puntuation: Number,
   role: {type: String, enum: ["anunciante", "cliente"]},
   description: String,
+  status: {type:String, enum:["Pending Confirmation", "Active"], default:"Pending Confirmation"},
+  confirmationCode:String,
   imgPath: {type: String, default: 'https://res.cloudinary.com/drlexgkiu/image/upload/v1544976860/avatar_2x.png'}, 
 }, {
   timestamps: {

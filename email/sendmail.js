@@ -6,7 +6,8 @@ const transporter = require('./transport');
       to, 
       subject, 
       text: subject,
-      html: `<p>Account successfully created</p> `
+      html: `<a href="http://localhost:3000/auth/confirm/${message}">confirm your email<a>
+      <p>or copy this url in your navigator localhost:3000/auth/confirm/${message}`
     })
     .then(info => console.log(info)).catch(e=>console.log(e))
   }
