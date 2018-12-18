@@ -147,8 +147,10 @@ router.post("/profile/:id", uploadCloud.single('photo'), (req, res, next) => {
     mail: req.body.mail,
     role: req.body.role,
     description: req.body.description,
-    imgPath: req.file.url
   };
+if (req.file) {
+    us.imgPath = req.file.url
+}
   User.findByIdAndUpdate(req.params.id, us)
     .then(() => res.redirect("/"))
     .catch(e => console.log("Error updating profile", e));

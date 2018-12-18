@@ -90,7 +90,8 @@ router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
 });
 
 
- router.post("/events/:id", (req, res, next) => {
+ router.post("/events/:id", uploadCloud.single('photo'), (req, res, next) => {
+  console.log(req.body.name)
   const event = {
     name: req.body.name,
     capacity: req.body.capacity,
@@ -98,8 +99,8 @@ router.post("/events", uploadCloud.single('photo'), (req, res, next) => {
     id_user_anunciante: req.user._id,
     date: req.body.date,
     price: req.body.price,
-    category: req.body.category
-    // rating: req.body.rating,
+    category: req.body.category,
+    rating: req.body.rating,
   };
   events.findByIdAndUpdate(req.params.id, event)
     .then(() => res.redirect("/events/"))
