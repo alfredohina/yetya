@@ -6,51 +6,56 @@ const geolocateMe = () => {
           resolve({
             lat: position.coords.latitude,
             lng: position.coords.longitude
-          });
+          })
         },
         () => {
-          reject(
-            {
-              lat: 40.3820829,
-              lng: -3.6738811
-            },
-            "Error in the geolocation service.");
+          reject("Error in the geolocation service.");
         }
       );
     } else {
-      console.log("entra qui");
-      let position = {
-        lat: 40.3820829,
-        lng: -3.6738811
-      };
-      reject(
-        {
-          lat: 40.3820829,
-          lng: -3.6738811
-        },
-        "Browser does not support geolocation.");
+      reject("Browser does not support geolocation.");
     }
   });
 };
 
-const addMarker = (title, position, map) => {
-  return new google.maps.Marker({
-    position,
+const addMarker = (titulo, posicion, map,icon,infowindow) => {
+  let marker = new google.maps.Marker({
+    position: posicion,
     map,
-    title
+    title: titulo,
+    icon: icon
   });
+  marker.addListener("click", function() {
+    infowindow.open(map, marker);
+  });
+   return marker
 };
 
+let infowindow;
+
 const loadData = map => {
-  //console.log(events);
-  events.forEach(events =>
+  events.forEach(event => {
+    //console.log(events.name)
+    let infowindow = new google.maps.InfoWindow({
+      content:
+        "<div><strong>" +
+        event.name +
+        "</strong><br>" +
+        "Description: " +
+        event.description + "</br>" +
+        `<a href="/events/${event._id}" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>`
+
+      ,maxWidth: 400
+    });
     addMarker(
-      events.name,
+      event.name,
       {
-        lat: events.location.coordinates[0],
-        lng: events.location.coordinates[1]
+        lat: event.location.coordinates[0],
+        lng: event.location.coordinates[1]
       },
-      map
-    )
-  );
+      map,
+       'https://res.cloudinary.com/drlexgkiu/image/upload/v1545159229/yetyamaps.png',
+      infowindow
+    );
+  });
 };

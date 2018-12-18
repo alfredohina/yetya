@@ -2,6 +2,7 @@
 
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
+require('dotenv').load();
 require('dotenv').config();
 const mongoose = require("mongoose");
 const Event = require("../models/Event");
@@ -45,7 +46,33 @@ let events = [
   date: new Date(2018, 7, 7, 18, 0),
   price: 150,
   category: "street",
-  }
+  },
+  {
+    name: "Mimo!!",
+    id_user_anunciante: "5c06d6125ef77c07aa3ddcae",
+    location: {type:"Point",coordinates:[40.413387,-3.672356]},
+    rating: 7,
+    description: "Mamemimomu mimemo momimame",
+    capacity: 120,
+    reserved: [{ id_cliente: "5c06d6125ef77c07aa3ddcad", hasCome: true}],
+    date: new Date(2018, 7, 7, 18, 0),
+    price: 150,
+    category: "street",
+    },
+    {
+      name: "Rock and roll!!",
+      id_user_anunciante: "5c06d6125ef77c07aa3ddcae",
+      location: {type:"Point",coordinates:[40.409787,-3.672956]},
+      rating: 7,
+      description: "Museo de piedras preciosas y desodorantes",
+      capacity: 120,
+      reserved: [{ id_cliente: "5c06d6125ef77c07aa3ddcad", hasCome: true}],
+      date: new Date(2018, 7, 7, 18, 0),
+      price: 150,
+      category: "street",
+      }
+
+
 ];
 
 
