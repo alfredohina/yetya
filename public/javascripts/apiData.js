@@ -29,4 +29,4 @@ const getApiData = (latitud, longitud) => {
   });
 };
 
-getApiData();
+//getApiData();

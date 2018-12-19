@@ -10,6 +10,11 @@ a {
   height: 500px;
   width: 100%; }
 
+#mapa {
+  height: 300px;
+  width: 100%;
+  margin-bottom: 50px; }
+
 .container-fluid {
   padding: 0 50px !important; }
 
