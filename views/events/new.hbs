@@ -23,8 +23,8 @@
                         <label for="date">
                             <h4>Date</h4>
                         </label>
-                        <input type="datetime-local" name="date" class="form-control" id="date" placeholder="date" 
-       min="2018-12-21T00:00" max="2018-12-30T00:00">
+                        <input type="datetime-local" name="date" class="form-control" id="date" placeholder="date" min="2018-12-21T00:00"
+                            max="2018-12-30T00:00">
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,20 +60,20 @@
 
 
                     <div class="form-row">
-                    <div class="form-group col-md">
-                        <label for="photo">
-                            <h4>Upload a picture</h4>
-                        </label>
-                        <input type="file" name="photo" class="form-control">
+                        <div class="form-group col-md">
+                            <label for="photo">
+                                <h4>Upload a picture</h4>
+                            </label>
+                            <input type="file" name="photo" class="form-control">
+                        </div>
                     </div>
+
+
+
+                    <br><br><br>
+                    <div id="mapa"></div>
+
                 </div>
-
-
-
-                </div>
-
-                <button class="btn btn-lg btn-outline-success" type="submit">Add new event</button>
-                <button class="btn btn-lg btn-outline-secondary" type="reset"><i class="fas fa-redo-alt"></i> Reset</button>
 
             </form>
 
@@ -81,6 +81,8 @@
 
         <br>
 
+
     </div>
 </div>
-<br>
+
+<script src="javascript/getMapEvent.js"></script>
