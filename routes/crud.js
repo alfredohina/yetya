@@ -81,7 +81,8 @@ router.post("/events", isLoggedIn('/auth/login'), uploadCloud.single('photo'), (
     id_user_anunciante: req.user._id,
     date: req.body.date,
     price: req.body.price,
-    category: req.body.category
+    category: req.body.category,
+    location: { type: "Point", coordinates: [req.body.latitude, req.body.longitude] }
   };
   if (req.file) {
     event.imgPath = req.file.url
