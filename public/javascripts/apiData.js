@@ -10,9 +10,7 @@ const getApiData = (latitud, longitud) => {
         content:
           "<div><strong>" +
           e.title +
-          "</strong><br>" +
-          "Description: " +
-          e.description,
+          "</strong><br>",
         maxWidth: 200
       })
       addMarker(

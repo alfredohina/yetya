@@ -47,7 +47,7 @@ const loadData = map => {
     
     events.forEach(event => {
       let distance = calcDistance(center, event.location.coordinates);
-
+      console.log(distance)
       if (distance <= 1) {
         let infowindow = new google.maps.InfoWindow({
           content:
