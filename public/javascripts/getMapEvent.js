@@ -18,19 +18,20 @@ google.maps.event.addListener(mapa, "click", function(event) {
     map: mapa,
     title: "Aqui estara nuestro evento!"
   });
+console.log(marker.position.lat.prototype)
   let infowindow = new google.maps.InfoWindow({
     content: "Tu estas Aqui!",
     maxWidth: 400
   });
   marker.addListener("click", function() {
     infowindow.open(mapa, marker);
+    
   });
   document.querySelector("input[name=latitude]").value =  event.latLng.lat();
   document.querySelector("input[name=longitude]").value =  event.latLng.lng();
 
-  console.log(event.latLng.lat())
-  
 });
+
 
 const geolocateMe = () => {
   return new Promise((resolve, reject) => {
