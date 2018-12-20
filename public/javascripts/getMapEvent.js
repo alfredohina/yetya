@@ -1,23 +1,34 @@
-const mapa = new google.maps.Map(
-  document.getElementById('mapa'), {
-    zoom: 15,
-    center: {
-      lat: 42.4197351,
-      lng: -3.7040427
-    }
+const mapa = new google.maps.Map(document.getElementById("mapa"), {
+  zoom: 15,
+  center: {
+    lat: 42.4197351,
+    lng: -3.7040427
   }
-);
+});
 
 
-google.maps.event.addListener(mapa, 'click', 
-function(event){
-  let marker = new google.maps.Marker({
+let marker;
+console.log('aaaa')
+
+google.maps.event.addListener(mapa, "click", function(event) {
+
+  if (marker) {marker.setMap(null)}
+  marker = new google.maps.Marker({
     position: event.latLng,
     map: mapa,
-    title: 'Aqui estara nuestro evento!'
+    title: "Aqui estara nuestro evento!"
   });
+  let infowindow = new google.maps.InfoWindow({
+    content: "Tu estas Aqui!",
+    maxWidth: 400
+  });
+  marker.addListener("click", function() {
+    infowindow.open(mapa, marker);
+  });
+  document.querySelector("input[name=latitude]").value =  event.latLng.lat;
+  document.querySelector("input[name=longitude]").value =  event.latLng.lng;
   
-})
+});
 
 const geolocateMe = () => {
   return new Promise((resolve, reject) => {
@@ -27,7 +38,7 @@ const geolocateMe = () => {
           resolve({
             lat: position.coords.latitude,
             lng: position.coords.longitude
-          })
+          });
         },
         () => {
           reject("Error in the geolocation service.");
@@ -41,37 +52,22 @@ const geolocateMe = () => {
 
 geolocateMe()
   .then(center => {
-    console.log(`esto es Longitud ${center.lng} y esto es lat ${center.lat}`)  
-    mapa.setCenter(center)
+    console.log(`esto es Longitud ${center.lng} y esto es lat ${center.lat}`);
+    mapa.setCenter(center);
   })
-  .catch(() => { 
-    console.log('Aqui catch geolocateme')
-    geolocateMe() 
-  })
+  .catch(() => {
+    console.log("Aqui catch geolocateme");
+    geolocateMe();
+  });
 
-
-// google.maps.event.addListener(mapa, 'click', 
-// function(event){
-//   console.log(`Esta son las coordenadas ${event.latLng}`)
-//   let marker = new google.maps.Marker({
-//     position:event.latLng ,
-//     mapa,
-//     title: 'Evento Nuevo, aqui se lia'
-//   })
-//   return marker
-// })
-
-const addMarker = (titulo, posicion, mapa,icon,infowindow) => {
+const addMarker = (titulo, posicion, mapa, icon, infowindow) => {
   let marker = new google.maps.Marker({
     position: posicion,
     mapa,
-    title: titulo,
+    title: titulo
   });
   marker.addListener("click", function() {
     infowindow.open(mapa, marker);
   });
-   return marker
+  return marker;
 };
-
-
-
