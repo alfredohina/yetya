@@ -8,7 +8,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="home">
 
-            <form action="/events" method="POST">
+            <form action="/events" method="POST" enctype="multipart/form-data">
 
 
 
@@ -23,7 +23,8 @@
                         <label for="date">
                             <h4>Date</h4>
                         </label>
-                        <input type="date" name="date" class="form-control" id="date" placeholder="Date">
+                        <input type="datetime-local" name="date" class="form-control" id="date" placeholder="date" min="2018-12-21T00:00"
+                            max="2018-12-30T00:00">
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,15 +57,39 @@
                         </label>
                         <input type="number" name="price" class="form-control" id="price">
                     </div>
-                </div>
 
+
+                    <div class="form-row">
+                        <div class="form-group col-md">
+                            <label for="photo">
+                                <h4>Upload a picture</h4>
+                            </label>
+                            <input type="file" name="photo" class="form-control">
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                    <div id="mapa"></div>
+
+
+
+
+
+
+                </div>
+                <input type="text" name="latitude" placeholder="latitude">
+                <input type="text" name="longitude" placeholder="longitude">
                 <button class="btn btn-lg btn-outline-success" type="submit">Add new event</button>
                 <button class="btn btn-lg btn-outline-secondary" type="reset"><i class="fas fa-redo-alt"></i> Reset</button>
 
+            </form>
 
         </div>
 
         <br>
 
+
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5zV84IbllnzEJ1PwadGFWFlWG76R_ho8&libraries=geometry"></script>
+<script src="/javascripts/getMapEvent.js"></script>

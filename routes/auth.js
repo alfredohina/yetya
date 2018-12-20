@@ -1,12 +1,14 @@
+require('dotenv').config();
+
 const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
-const {isLoggedOut} = require('../middlewares/isLogged')
-const {isLoggedIn} = require('../middlewares/isLogged')
+const { isLoggedOut } = require('../middlewares/isLogged')
+const { isLoggedIn } = require('../middlewares/isLogged')
+const uploadCloud = require('../config/cloudinary');
+const sendMail = require("../email/sendmail");
 
-
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
 
@@ -15,7 +17,7 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login", { "message": req.flash("error") });
 });
 
-router.post("/login",isLoggedOut('/'), passport.authenticate("local", {
+router.post("/login", isLoggedOut('/'), passport.authenticate("local", {
   successRedirect: "/",
   failureRedirect: "/auth/login",
   failureFlash: true,
@@ -31,7 +33,7 @@ router.post("/signup", (req, res, next) => {
   const password = req.body.password;
   const mail = req.body.mail;
   const role = "cliente";
-  if (username === "" || password === "") {
+  if (username === "" || password === "" || mail === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
@@ -45,25 +47,40 @@ router.post("/signup", (req, res, next) => {
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
+
+    const characters =
+      "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let token = "";
+    for (let i = 0; i < 25; i++) {
+      token += characters[Math.floor(Math.random() * characters.length)];
+    }
+
     const newUser = new User({
       username,
       password: hashPass,
       mail,
-      role
+      role,
+      confirmationCode: token
     });
 
     newUser.save()
-    .then(() => {
-      res.redirect("/auth/login");
-    })
-    .catch(err => {
-      console.log(err);
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+      .then(() => {
+        sendMail(mail, "Welcome to Yetya", newUser.confirmationCode);
+        res.redirect("/auth/login");
+      })
+      .catch(err => {
+        console.log(err);
+        res.render("auth/signup", { message: "Something went wrong" });
+      })
   });
 });
 
-
+router.get("/confirm/:code", (req, res, next) => {
+  const code = req.params.code;
+  User.findOneAndUpdate({ confirmationCode: code }, { status: "Active" }).then(
+    () => res.redirect("/")
+  ).catch(()=>res.render("/auth/signup",{message:"Error"}));
+});
 
 
 router.get("/signup2", (req, res, next) => {
@@ -97,16 +114,14 @@ router.post("/signup2", (req, res, next) => {
     });
 
     newUser.save()
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch(err => {
-      res.render("auth/signup2", { message: "Something went wrong" });
-    })
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch(err => {
+        res.render("auth/signup2", { message: "Something went wrong" });
+      })
   });
 });
-
-
 
 
 
@@ -126,18 +141,25 @@ router.get("/:id/profile", (req, res, next) => {
     });
 });
 
-router.post("/profile/:id", (req, res, next) => {
-  const us = {
-    puntuacion: req.body.puntuacion,
-    mail: req.body.mail,
-    role: req.body.role,
-    description: req.body.description
-  };
+
+router.post("/profile/:id", uploadCloud.single('photo'), (req, res, next) => {
+  const us = {}
+  if (req.file) {
+      us.imgPath = req.file.url
+  }
+  if (req.body.mail) {
+    us.mail = req.body.mail
+  }
+  if (req.body.role) {
+    us.role = req.body.role
+  }
+  if (req.body.description) {
+    us.description = req.body.description
+  }
   User.findByIdAndUpdate(req.params.id, us)
     .then(() => res.redirect("/"))
     .catch(e => console.log("Error updating profile", e));
 });
-
 
 
 module.exports = router;

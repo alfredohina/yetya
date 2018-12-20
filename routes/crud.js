@@ -5,6 +5,7 @@ const router = express.Router();
 const events = require("../models/Event");
 const {isLoggedIn} = require('../middlewares/isLogged');
 const mongoose = require("mongoose");
+const uploadCloud = require('../config/cloudinary');
 
 router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
   var useradmin = false;
@@ -22,12 +23,11 @@ router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
 });
 
 
-router.get("/events/:id/myevents", (req, res, next) => {
-  events.find({id_user_anunciante:req.user._id})
+router.get("/events/:id/myevents", isLoggedIn('/auth/login'), (req, res, next) => {
+  events.find({id_user_anunciante:req.user._id, date: { $gt: Date.now() } })
       .then(myev => {
-        console.log(myev)
+        //console.log(Date.now('YYYY/MM/D'), "y", myev[0].date.getTime() )
       res.render("events/myevents", { myev });
-
     })
     .catch(err => {
       console.log("Error editing profile", err);
@@ -37,18 +37,20 @@ router.get("/events/:id/myevents", (req, res, next) => {
 
 
 
- router.get("/events/new", (req, res, next) => {
+ router.get("/events/new", isLoggedIn('/auth/login'), (req, res, next) => {
   res.render("events/new");
 });
 
 
-router.get("/events/:id", (req, res, next) => {
+router.get("/events/:id", isLoggedIn('/auth/login'), (req, res, next) => {
   events.findById(req.params.id).then(ev => {
+    const date = ev.date.getTime();
+    console.log(date)
     res.render("events/show", { ev } );
   })
 });
 
-router.get("/events/:id/delete", (req, res, next) => {
+router.get("/events/:id/delete", isLoggedIn('/auth/login'), (req, res, next) => {
   events.findByIdAndDelete(req.params.id)
     .then(() => res.redirect("/events"))
     .catch(e => {
@@ -57,10 +59,12 @@ router.get("/events/:id/delete", (req, res, next) => {
     });
 });
 
-router.get("/events/:id/edit", (req, res, next) => {
+router.get("/events/:id/edit", isLoggedIn('/auth/login'), (req, res, next) => {
   events.findById(req.params.id)
     .then(ev => {
+      console.log(ev)
       res.render("events/edit", { ev });
+
     })
     .catch(err => {
       console.log("Error editing event", err);
@@ -69,7 +73,7 @@ router.get("/events/:id/edit", (req, res, next) => {
 });
 
 
-router.post("/events", (req, res, next) => {
+router.post("/events", isLoggedIn('/auth/login'), uploadCloud.single('photo'), (req, res, next) => {
   const event = {
     name: req.body.name,
     capacity: req.body.capacity,
@@ -77,8 +81,12 @@ router.post("/events", (req, res, next) => {
     id_user_anunciante: req.user._id,
     date: req.body.date,
     price: req.body.price,
-    category: req.body.category
+    category: req.body.category,
+    location: { type: "Point", coordinates: [req.body.latitude, req.body.longitude] }
   };
+  if (req.file) {
+    event.imgPath = req.file.url
+  }
   events.create(event)
     .then(() => res.redirect("/events"))
     .catch(e => {
@@ -88,15 +96,44 @@ router.post("/events", (req, res, next) => {
 });
 
 
- router.post("/events/:id", (req, res, next) => {
+ router.post("/events/:id", isLoggedIn('/auth/login'), uploadCloud.single('photo'), (req, res, next) => {
   const event = {
-    name: req.body.name,
-    rating: req.body.rating,
-    description: req.body.description
+      id_user_anunciante: req.user._id,
+      category: req.body.category
   };
+  if (req.file) {
+    event.imgPath = req.file.url
+  }
+  if (req.body.name) {
+    event.name = req.body.name
+  }
+  if (req.body.capacity) {
+    event.capacity = req.body.capacity
+  }
+  if (req.body.description) {
+    event.description = req.body.description
+  }
+  if (req.body.date) {
+    event.date = req.body.date
+  }
+  if (req.body.price) {
+    event.price = req.body.price
+  }
   events.findByIdAndUpdate(req.params.id, event)
     .then(() => res.redirect("/events/"))
     .catch(e => console.log("Error updating event", e));
 });
+
+
+// router.post("/myevents/:id", (req, res, next) => {
+//   const event = {
+    
+//   };
+//   events.findByIdAndUpdate(req.params.id, event)
+//     .then(() => res.redirect("/events/:id/myevents/"))
+//     .catch(e => console.log("Error updating event", e));
+// });
+
+
 
 module.exports = router;

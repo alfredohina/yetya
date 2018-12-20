@@ -35,22 +35,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-
-app.use(session({
-  secret: "basic-auth-secret",
-  cookie: {
-    maxAge: 60000
-  },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60 // 1 day
-  })
-}));
-app.use(flash());
-
-
-
 // Enable authentication using session + passport
 app.use(session({
   secret: 'irongenerator',
@@ -100,7 +84,7 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Yetya';
 
     
 
