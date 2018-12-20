@@ -33,7 +33,7 @@ router.post("/signup", (req, res, next) => {
   const password = req.body.password;
   const mail = req.body.mail;
   const role = "cliente";
-  if (username === "" || password === "") {
+  if (username === "" || password === "" || email === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }
@@ -141,16 +141,21 @@ router.get("/:id/profile", (req, res, next) => {
     });
 });
 
+
 router.post("/profile/:id", uploadCloud.single('photo'), (req, res, next) => {
-  const us = {
-    puntuacion: req.body.puntuacion,
-    mail: req.body.mail,
-    role: req.body.role,
-    description: req.body.description,
-  };
-if (req.file) {
-    us.imgPath = req.file.url
-}
+  const us = {}
+  if (req.file) {
+      us.imgPath = req.file.url
+  }
+  if (req.body.mail) {
+    us.mail = req.body.mail
+  }
+  if (req.body.role) {
+    us.role = req.body.role
+  }
+  if (req.body.description) {
+    us.description = req.body.description
+  }
   User.findByIdAndUpdate(req.params.id, us)
     .then(() => res.redirect("/"))
     .catch(e => console.log("Error updating profile", e));

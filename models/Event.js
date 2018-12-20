@@ -4,14 +4,14 @@ const Schema   = mongoose.Schema;
 const eventSchema = new Schema({
   name: String,
   id_user_anunciante: String,
-  location: { type: { type: String }, coordinates: [Number], default: ['2,5'] },
+  // location: { type: { type: String }, coordinates: [Number], default: ['2,5'] },
   hasLocation:Boolean,
   rating: Number,
   description: String,
   capacity:Number,
   reserved: [{ id_cliente: String, isCoomed: false}],
   date: Date,
-  price: { type: Number, required: true },
+  price: Number,
   imgPath: {type: String, default: 'https://res.cloudinary.com/drlexgkiu/image/upload/v1544979115/defaultevent.png'},
   category: {type: String, enum:["street", "cultural", "gastronomy", "other"] },
 }, {

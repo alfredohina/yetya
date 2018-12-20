@@ -8,7 +8,6 @@ const mapa = new google.maps.Map(document.getElementById("mapa"), {
 
 
 let marker;
-console.log('aaaa')
 
 google.maps.event.addListener(mapa, "click", function(event) {
 

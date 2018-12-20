@@ -1,5 +1,8 @@
 <h2>These are your events {{user.username}}</h2>
+
+{{#if useradmin}}
 <a href="/events/new" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create new event</a>
+{{/if}}
 
 <br><br>
 <div class="card-columns">
