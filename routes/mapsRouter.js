@@ -6,7 +6,7 @@ var Axios = require("axios");
 router.get("/home", (req, res, next) => {
   Event.find()
     .then(events => {
-      res.render("./maps/home", { events: JSON.stringify(events) });
+      res.render("./maps/home", { events: JSON.stringify(events), layout:'mapLayout'});
     })
     .catch(() => {
       console.log("error al ver los eventos");

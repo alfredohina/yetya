@@ -3,17 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // const map =  'hola' //document.getElementById('map')
 
 
-   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 15,
-    center: {
-      lat: 42.4197351,
-      lng: -3.7040427
-    }
-  });
+
 
   //addmaker('A ver si sale', {lat:40.4045385,lng: -3.6988189}, map)
 
-  loadData(map);
+  
 
   // google.maps.event.addListener(map, 'click',
   // function(event){
@@ -26,24 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //   })
   // })
 
-  geolocateMe()
-    .then(c => {
-      latitud = c.lat;
-      longitud = c.lng;
-      let infowindow = new google.maps.InfoWindow({
-        content: "Holita",
-        maxWidth: 400
-      });
-      addMarker("Tu", c, map, infowindow);
-      getApiData(latitud, longitud);
-      map.setCenter(c);
-      center = c;
-    })
-    .catch(() => {
-      console.log("Aqui catch geolocateme");
-      geolocateMe();
-    });
-
+  loadData()
 
   // calculates distance between two points in km's
 //   function calcDistance(p1, p2) {
