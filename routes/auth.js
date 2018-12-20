@@ -33,7 +33,7 @@ router.post("/signup", (req, res, next) => {
   const password = req.body.password;
   const mail = req.body.mail;
   const role = "cliente";
-  if (username === "" || password === "" || email === "") {
+  if (username === "" || password === "" || mail === "") {
     res.render("auth/signup", { message: "Indicate username and password" });
     return;
   }

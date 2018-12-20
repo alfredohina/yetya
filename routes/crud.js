@@ -26,7 +26,7 @@ router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
 router.get("/events/:id/myevents", isLoggedIn('/auth/login'), (req, res, next) => {
   events.find({id_user_anunciante:req.user._id, date: { $gt: Date.now() } })
       .then(myev => {
-        console.log(Date.now('YYYY/MM/D'), "y", myev[0].date.getTime() )
+        //console.log(Date.now('YYYY/MM/D'), "y", myev[0].date.getTime() )
       res.render("events/myevents", { myev });
     })
     .catch(err => {

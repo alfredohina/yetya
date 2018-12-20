@@ -11,6 +11,7 @@ let marker;
 
 google.maps.event.addListener(mapa, "click", function(event) {
 
+  
   if (marker) {marker.setMap(null)}
   marker = new google.maps.Marker({
     position: event.latLng,
@@ -24,8 +25,10 @@ google.maps.event.addListener(mapa, "click", function(event) {
   marker.addListener("click", function() {
     infowindow.open(mapa, marker);
   });
-  document.querySelector("input[name=latitude]").value =  event.latLng.lat;
-  document.querySelector("input[name=longitude]").value =  event.latLng.lng;
+  document.querySelector("input[name=latitude]").value =  event.latLng.lat();
+  document.querySelector("input[name=longitude]").value =  event.latLng.lng();
+
+  console.log(event.latLng.lat())
   
 });
 
@@ -51,7 +54,7 @@ const geolocateMe = () => {
 
 geolocateMe()
   .then(center => {
-    console.log(`esto es Longitud ${center.lng} y esto es lat ${center.lat}`);
+    //console.log(`esto es Longitud ${center.lng} y esto es lat ${center.lat}`);
     mapa.setCenter(center);
   })
   .catch(() => {
