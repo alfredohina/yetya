@@ -43,9 +43,9 @@ router.get("/events/:id/myevents", isLoggedIn('/auth/login'), (req, res, next) =
 
 
 router.get("/events/:id", isLoggedIn('/auth/login'), (req, res, next) => {
-  events.findById(req.params.id).then(ev => {
-    const date = ev.date.getTime();
-    console.log(date)
+  events.findById(req.params.id).lean().then(ev => {
+    ev.date = 20;
+    //let date = ev.date.getTime();
     res.render("events/show", { ev } );
   })
 });
