@@ -36,18 +36,26 @@ router.get("/events/:id/myevents", isLoggedIn('/auth/login'), (req, res, next) =
 });
 
 
-
  router.get("/events/new", isLoggedIn('/auth/login'), (req, res, next) => {
   res.render("events/new");
 });
 
 
 router.get("/events/:id", isLoggedIn('/auth/login'), (req, res, next) => {
-  events.findById(req.params.id).lean().then(ev => {
-    ev.date = 20;
-    //let date = ev.date.getTime();
+  events.findById(req.params.id).then(ev => {
+    let date = ev.date.getTime();
     res.render("events/show", { ev } );
   })
+});
+
+router.post("/events/:id/go", isLoggedIn('/auth/login'), (req, res, next) => {
+  const  reserved= req.user._id
+const id=req.params.id
+console.log(id)
+events.findByIdAndUpdate(id, {reserved:[reserved]})
+  .then((e) => { res.redirect("/events")
+  console.log(e) })
+  .catch(e => console.log("Error updating event", e));
 });
 
 router.get("/events/:id/delete", isLoggedIn('/auth/login'), (req, res, next) => {

@@ -18,7 +18,7 @@ a {
   width: 200px; }
 
 #map {
-  height: 100vh;
+  height: 500px;
   width: 100%; }
 
 nav {
@@ -83,6 +83,20 @@ footer {
   color: #ddd;
   float: right; }
 
+.carousel {
+  margin: 0 50px; }
+
+.active {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important; }
+
+.card-img-top {
+  height: 140px; }
+
+.layout1 {
+  margin-top: 150px; }
+
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating > input:checked ~ label,
 .rating:not(:checked) > label:hover,
@@ -95,5 +109,8 @@ footer {
 .rating > label:hover ~ input:checked ~ label,
 .rating > input:checked ~ label:hover ~ label {
   color: #FFED85; }
+
+.carousel-item {
+  display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */

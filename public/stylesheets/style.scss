@@ -21,7 +21,8 @@ a {
 
 
 #map{
-  height: 100vh;
+  //height: 100vh;
+  height: 500px;
   width: 100%;
 }
 
@@ -101,6 +102,24 @@ footer {
  float: right; 
 }
 
+.carousel {
+  margin: 0 50px;
+}
+
+.active{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+}
+
+.card-img-top {
+  height: 140px;
+}
+
+.layout1 {
+  margin-top: 150px;
+}
+
 /***** CSS Magic to Highlight Stars on Hover *****/
 
 .rating > input:checked ~ label, /* show gold star when clicked */
@@ -111,3 +130,7 @@ footer {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+.carousel-item {
+  display: inline-block
+}

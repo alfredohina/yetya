@@ -9,7 +9,7 @@ const eventSchema = new Schema({
   rating: Number,
   description: String,
   capacity:Number,
-  reserved: [{ id_cliente: String, isCoomed: false}],
+  reserved: [{ id_cliente: String }],
   date: Date,
   price: Number,
   imgPath: {type: String, default: 'https://res.cloudinary.com/drlexgkiu/image/upload/v1544979115/defaultevent.png'},
