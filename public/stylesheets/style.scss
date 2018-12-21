@@ -132,8 +132,10 @@ footer {
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
 .carousel-item {
-  display: inline-block;
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+  display: inline-block
+}
+
+
 
 
 
