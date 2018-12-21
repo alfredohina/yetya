@@ -1,8 +1,10 @@
+{{#if useradmin}}
+
 <h2>These are your events {{user.username}}</h2>
 
-{{#if useradmin}}
+
 <a href="/events/new" class="btn btn-success"><i class="fas fa-plus-circle"></i> Create new event</a>
-{{/if}}
+
 
 <br><br>
 <div class="card-columns">
@@ -33,3 +35,46 @@
 {{/unless}}
 
 </div>
+
+
+{{else}}
+
+
+
+
+<h2>These are your events {{user.username}}</h2>
+
+
+<br><br>
+<div class="card-columns">
+  
+{{#each Clev}}
+
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{this.imgPath}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{this.name}}</h5>
+      <p class="card-text">{{this.description}}</p>
+      <a href="/events/{{this._id}}" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>
+
+
+    </div>
+  </div>
+
+   
+{{/each}}
+
+
+{{#unless Clev}}
+
+<p>You don't have events</p>
+
+{{/unless}}
+
+</div>
+
+
+
+
+
+{{/if}}

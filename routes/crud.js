@@ -24,15 +24,33 @@ router.get("/events", [isLoggedIn('/auth/login')], (req, res, next) => {
 
 
 router.get("/events/:id/myevents", isLoggedIn('/auth/login'), (req, res, next) => {
-  events.find({id_user_anunciante:req.user._id, date: { $gt: Date.now() } })
+  var useradmin = false;
+  if (req.user.role === "anunciante") {
+    useradmin = true;
+  }
+  if (useradmin) {
+    events.find({ id_user_anunciante: req.user._id, date: { $gt: Date.now() } })
       .then(myev => {
         //console.log(Date.now('YYYY/MM/D'), "y", myev[0].date.getTime() )
-      res.render("events/myevents", { myev });
-    })
-    .catch(err => {
-      console.log("Error editing profile", err);
-      next();
-    });
+        res.render("events/myevents", { myev, useradmin });
+      })
+      .catch(err => {
+        console.log("Error editing profile", err);
+        next();
+      });
+  } else {
+    events.find( { reserved: req.user._id , date: { $gt: Date.now() } })
+    //.populate("reserved")
+    .then(Clev => {
+        console.log(Clev)
+        //console.log(Date.now('YYYY/MM/D'), "y", myev[0].date.getTime() )
+        res.render("events/myevents", { Clev, useradmin });
+      })
+      .catch(err => {
+        console.log("Error editing profile", err);
+        next();
+      });
+  }
 });
 
 
@@ -49,14 +67,14 @@ router.get("/events/:id", isLoggedIn('/auth/login'), (req, res, next) => {
 });
 
 router.post("/events/:id/go", isLoggedIn('/auth/login'), (req, res, next) => {
-  const  reserved= req.user._id
-const id=req.params.id
-console.log(id)
-events.findByIdAndUpdate(id, {reserved:[reserved]})
-  .then((e) => { res.redirect("/events")
-  console.log(e) })
-  .catch(e => console.log("Error updating event", e));
-});
+  const userid= req.user._id
+  const id=req.params.id
+  console.log(id)
+  events.findByIdAndUpdate(id, {$push : {reserved: [userid]}})
+    .then((e) => { res.redirect("/events")
+    console.log(e) })
+    .catch(e => console.log("Error updating event", e));
+  });
 
 router.get("/events/:id/delete", isLoggedIn('/auth/login'), (req, res, next) => {
   events.findByIdAndDelete(req.params.id)
