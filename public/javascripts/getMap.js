@@ -47,13 +47,13 @@ const loadData = () => {
       //const myLoc = new google.maps.LatLng(center.lat, center.lng);
       latitud = c.lat;
       longitud = c.lng;
-      
       getApiData(latitud, longitud).then(e => {
-        let infowindow = new google.maps.InfoWindow({
-          content: "Holita",
+       infowindow = new google.maps.InfoWindow({
+          content: "Aqui estas tu!",
           maxWidth: 400
         });
-        addMarker("Tu", c, map, infowindow);
+        console.log('Aqui entra')
+        addMarker("Tu", c, map);
         map.setCenter(c);
         events.forEach(event => {
           let distance = calcDistance(c, event.location.coordinates);
@@ -70,7 +70,6 @@ const loadData = () => {
                 `<a href="/events/${
                   event._id
                 }" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>`,
-
               maxWidth: 400
             });
             addMarker(

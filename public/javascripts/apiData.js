@@ -9,8 +9,8 @@ const getApiData = (latitud, longitud) => {
           lng: -3.7040427
         }
       });
-    console.log(events);
-    console.log('Entra en apidata')
+    //console.log(events);
+    //console.log('Entra en apidata')
     events.data.forEach(e => {
       //console.log(e);
       if (e.location){
