@@ -35,46 +35,55 @@ let infowindow;
 
 function calcDistance(p1, p2) {
   p1 = new google.maps.LatLng(p1.lat, p1.lng);
-    p2 = new google.maps.LatLng(p2[0], p2[1]);
+  p2 = new google.maps.LatLng(p2[0], p2[1]);
   return (
     google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000
   ).toFixed(2);
 }
 
-const loadData = map => {
-  geolocateMe().then(center => {
-    //const myLoc = new google.maps.LatLng(center.lat, center.lng);
-    
-    events.forEach(event => {
-      let distance = calcDistance(center, event.location.coordinates);
-      console.log(distance)
-      if (distance <= 1) {
-        let infowindow = new google.maps.InfoWindow({
-          content:
-            "<div><strong>" +
-            event.name +
-            "</strong><br>" +
-            "Description: " +
-            event.description +
-            "</br>" +
-            `<a href="/events/${
-              event._id
-            }" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>`,
+let info = new google.maps.InfoWindow({
+  content: "Aqui estas tu!",
+  maxWidth: 400
+});
 
-          maxWidth: 400
+const loadData = () => {
+  geolocateMe()
+    .then(c => {
+      latitud = c.lat;
+      longitud = c.lng;
+      getApiData(latitud, longitud).then(e => {
+        console.log('Aqui entra')
+        addMarker("Tu", c, map,info);
+        map.setCenter(c);
+        events.forEach(event => {
+          let distance = calcDistance(c, event.location.coordinates);
+          console.log(distance);
+          if (distance <= 1) {
+             infowindow = new google.maps.InfoWindow({
+              content:
+                "<div><strong>" +
+                event.name +
+                "</strong><br>" +
+                event.description +
+                "</br>" +
+                `<a href="/events/${
+                  event._id
+                }" class="btn btn-outline-success"><i class="fas fa-eye"></i> View event</a>`,
+              maxWidth: 400
+            });
+            addMarker(
+              event.name,
+              {
+                lat: event.location.coordinates[0],
+                lng: event.location.coordinates[1]
+              },
+              map,
+              "https://res.cloudinary.com/drlexgkiu/image/upload/v1545159229/yetyamaps.png",
+              infowindow
+            );
+          }
         });
-        addMarker(
-          event.name,
-          {
-            lat: event.location.coordinates[0],
-            lng: event.location.coordinates[1]
-          },
-          map,
-          "https://res.cloudinary.com/drlexgkiu/image/upload/v1545159229/yetyamaps.png",
-          infowindow
-        );
-      }
-    });
-  })
-  .catch(err=>console.log(err))
+      });
+    })
+    .catch(err => console.log(err));
 };

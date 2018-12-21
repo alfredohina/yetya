@@ -18,12 +18,12 @@
 <br>
 				  <br>
          
-          <form action="/events/{{ev.id}}" method="POST">
+          <form action="/events/{{ev._id}}/go" method="POST">
             <button type="submit" class="btn btn-success">I Will Go</button>
           </form> 
 
 
-<form action="/events/{{ev.id}}" method="POST">
+{{!-- <form action="/events/{{ev.id}}" method="POST">
 <fieldset class="rating">
     <input type="radio" onClick="envia_form()" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
     <input type="radio" onClick="envia_form()" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
@@ -33,7 +33,7 @@
 </fieldset>
 
 <button type="submit" class="btn btn-outline-warning"><i class="fas fa-star"></i> Rate</button>
-</form>
+</form> --}}
 
 
 					</center>

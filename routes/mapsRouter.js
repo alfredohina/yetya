@@ -4,9 +4,16 @@ const Event = require("../models/Event");
 var Axios = require("axios");
 
 router.get("/home", (req, res, next) => {
-  Event.find()
+  const today = Date.now()
+  const tomorrow = today + 86400
+  console.log(today , tomorrow)
+  Event.find( { date : { $gte: today } })
+
+  // Event.find()
     .then(events => {
-      res.render("./maps/home", { events: JSON.stringify(events) });
+      let evmap = events
+      res.render("./maps/home", { events: JSON.stringify(events), layout:'mapLayout', evmap});
+      // res.render("./maps/home", { events: JSON.stringify(events), layout:'mapLayout'});
     })
     .catch(() => {
       console.log("error al ver los eventos");
@@ -15,7 +22,6 @@ router.get("/home", (req, res, next) => {
 
 router.post("/apievents", (req, res, next) => {
   const {latitud,longitud} = req.body;
-  console.log('Esta llegando al back')
 
 
   // let baseURL =

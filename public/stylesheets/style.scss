@@ -6,14 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+#spinnerDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+}
+
+#spinner{
+ width: 200px;
+}
 
 
 #map{
+<<<<<<< HEAD
   position: relative;
   top:80.68;
   height:100vh;
+=======
+  //height: 100vh;
+  height: 550px;
+>>>>>>> dev
   width: 100%;
 }
+
+nav{
+  position: fixed !important;
+  z-index: 10 !important;
+  top: 0 !important;
+  width: 100% !important;
+}
+
 #mapa{
   height: 300px;
   width: 100%;
@@ -83,6 +108,34 @@ footer {
  float: right; 
 }
 
+.carousel {
+  margin: 0 50px;
+}
+
+.active{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+}
+
+.card-img-top {
+  height: 140px;
+}
+
+.layout1 {
+  margin-top: 150px;
+}
+
+.card-body a {
+  text-decoration: none;
+  color: black;
+}
+
+.card-body a:hover {
+  text-decoration: none;
+  color: green;
+}
+
 /***** CSS Magic to Highlight Stars on Hover *****/
 
 .rating > input:checked ~ label, /* show gold star when clicked */
@@ -93,3 +146,185 @@ footer {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+.carousel-item {
+  display: inline-block
+}
+
+// .carousel-indicators {
+//   display: none;
+// }
+
+
+
+
+//////////////////////////////////////// Loading Spiner //////////////////////////////@at-root
+
+.cssload-loader-inner {
+  bottom: 0;
+  height: 120px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+}
+
+.cssload-cssload-loader-line-wrap-wrap {
+  animation: cssload-spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -o-animation: cssload-spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -ms-animation: cssload-spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -webkit-animation: cssload-spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  -moz-animation: cssload-spin 2000ms cubic-bezier(.175, .885, .32, 1.275) infinite;
+  box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 100px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  width: 200px;
+}
+.cssload-loader-line-wrap {
+  border: 8px solid transparent;
+  border-radius: 100%;
+  -o-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 200px;
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 200px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(1) { animation-delay: -50ms;
+  -o-animation-delay: -50ms;
+  -ms-animation-delay: -50ms;
+  -webkit-animation-delay: -50ms;
+  -moz-animation-delay: -50ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(2) { animation-delay: -100ms;
+  -o-animation-delay: -100ms;
+  -ms-animation-delay: -100ms;
+  -webkit-animation-delay: -100ms;
+  -moz-animation-delay: -100ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(3) { animation-delay: -150ms;
+  -o-animation-delay: -150ms;
+  -ms-animation-delay: -150ms;
+  -webkit-animation-delay: -150ms;
+  -moz-animation-delay: -150ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(4) { animation-delay: -200ms;
+  -o-animation-delay: -200ms;
+  -ms-animation-delay: -200ms;
+  -webkit-animation-delay: -200ms;
+  -moz-animation-delay: -200ms; }
+.cssload-cssload-loader-line-wrap-wrap:nth-child(5) { animation-delay: -250ms;
+  -o-animation-delay: -250ms;
+  -ms-animation-delay: -250ms;
+  -webkit-animation-delay: -250ms;
+  -moz-animation-delay: -250ms; }
+
+.cssload-cssload-loader-line-wrap-wrap:nth-child(1) .cssload-loader-line-wrap {
+  border-color: rgb(52,138,80);
+  height: 180px;
+  width: 180px;
+  top: 14px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(2) .cssload-loader-line-wrap {
+  border-color: rgb(138,138,138);
+  height: 152px;
+  width: 152px;
+  top: 28px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(3) .cssload-loader-line-wrap {
+  border-color: rgba(0,0,0,0.97);
+  height: 124px;
+  width: 124px;
+  top: 42px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(4) .cssload-loader-line-wrap {
+  border-color: rgb(52,138,80);
+  height: 96px;
+  width: 96px;
+  top: 56px;
+}
+.cssload-cssload-loader-line-wrap-wrap:nth-child(5) .cssload-loader-line-wrap {
+  border-color: rgb(0,0,0);
+  height: 68px;
+  width: 68px;
+  top: 70px;
+}
+
+
+
+
+@keyframes cssload-spin {
+  0%, 15% {
+  transform: rotate(0);
+  transform: rotate(0);
+}
+100% {
+  transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+}
+
+@-o-keyframes cssload-spin {
+  0%, 15% {
+  -o-transform: rotate(0);
+  transform: rotate(0);
+}
+100% {
+  -o-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+}
+
+@-ms-keyframes cssload-spin {
+  0%, 15% {
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+100% {
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+}
+
+@-webkit-keyframes cssload-spin {
+  0%, 15% {
+  -webkit-transform: rotate(0);
+  transform: rotate(0);
+}
+100% {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+}
+
+@-moz-keyframes cssload-spin {
+  0%, 15% {
+  -moz-transform: rotate(0);
+  transform: rotate(0);
+}
+100% {
+  -moz-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+}
