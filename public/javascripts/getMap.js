@@ -64,7 +64,6 @@ const loadData = () => {
                 "<div><strong>" +
                 event.name +
                 "</strong><br>" +
-                "Description: " +
                 event.description +
                 "</br>" +
                 `<a href="/events/${

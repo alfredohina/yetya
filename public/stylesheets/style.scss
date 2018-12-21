@@ -22,7 +22,7 @@ a {
 
 #map{
   //height: 100vh;
-  height: 500px;
+  height: 550px;
   width: 100%;
 }
 
@@ -120,6 +120,16 @@ footer {
   margin-top: 150px;
 }
 
+.card-body a {
+  text-decoration: none;
+  color: black;
+}
+
+.card-body a:hover {
+  text-decoration: none;
+  color: green;
+}
+
 /***** CSS Magic to Highlight Stars on Hover *****/
 
 .rating > input:checked ~ label, /* show gold star when clicked */
@@ -135,7 +145,9 @@ footer {
   display: inline-block
 }
 
-
+// .carousel-indicators {
+//   display: none;
+// }
 
 
 

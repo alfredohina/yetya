@@ -18,7 +18,7 @@ a {
   width: 200px; }
 
 #map {
-  height: 500px;
+  height: 550px;
   width: 100%; }
 
 nav {
@@ -96,6 +96,14 @@ footer {
 
 .layout1 {
   margin-top: 150px; }
+
+.card-body a {
+  text-decoration: none;
+  color: black; }
+
+.card-body a:hover {
+  text-decoration: none;
+  color: green; }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating > input:checked ~ label,

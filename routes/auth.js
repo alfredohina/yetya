@@ -18,7 +18,7 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", isLoggedOut('/'), passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/events",
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
@@ -157,7 +157,7 @@ router.post("/profile/:id", uploadCloud.single('photo'), (req, res, next) => {
     us.description = req.body.description
   }
   User.findByIdAndUpdate(req.params.id, us)
-    .then(() => res.redirect("/"))
+    .then(() => res.redirect("/events"))
     .catch(e => console.log("Error updating profile", e));
 });
 
