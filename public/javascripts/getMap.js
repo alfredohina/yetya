@@ -53,7 +53,7 @@ const loadData = () => {
       longitud = c.lng;
       getApiData(latitud, longitud).then(e => {
         console.log('Aqui entra')
-        addMarker("Tu", c, map,info);
+        addMarker("Tu", c, map,'https://res.cloudinary.com/drlexgkiu/image/upload/v1545468730/homer.png',info);
         map.setCenter(c);
         events.forEach(event => {
           let distance = calcDistance(c, event.location.coordinates);
@@ -78,7 +78,7 @@ const loadData = () => {
                 lng: event.location.coordinates[1]
               },
               map,
-              "https://res.cloudinary.com/drlexgkiu/image/upload/v1545159229/yetyamaps.png",
+              "https://res.cloudinary.com/drlexgkiu/image/upload/v1545468730/rosquilla.png",
               infowindow
             );
           }

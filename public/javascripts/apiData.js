@@ -28,7 +28,7 @@ const getApiData = (latitud, longitud) => {
             lng: e.location.longitude
           },
           map,
-          'https://res.cloudinary.com/drlexgkiu/image/upload/v1545160071/logomadrid.png',
+          'https://res.cloudinary.com/drlexgkiu/image/upload/v1545468730/madrid.png',
           infowindow
         );}
     });
