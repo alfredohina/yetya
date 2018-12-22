@@ -13,6 +13,7 @@ const path         = require('path');
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
+const fecha = require('handlebars.moment');
     
 
 mongoose
@@ -28,6 +29,8 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+fecha.registerHelpers(hbs);
 
 // Middleware Setup
 app.use(logger('dev'));
